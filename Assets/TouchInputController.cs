@@ -6,25 +6,27 @@ public class TouchInputController : MonoBehaviour
 {
     [SerializeField] private TouchButton _leftButton;
     [SerializeField] private TouchButton _rightButton;
-    [SerializeField] private Button _jumpButton;
+    [SerializeField] private TouchButton _jumpButton;
 
     public float Horizontal { get; private set; }
     public bool JumpPressed { get; private set; }
 
     private void OnEnable()
     {
-        _jumpButton.onClick.AddListener(OnJumpButtonClick);
+        _jumpButton.OnPressed += OnJumpButtonPressed;
     }
+
 
     private void OnDisable()
     {
-        _jumpButton.onClick.RemoveListener(OnJumpButtonClick);
+        _jumpButton.OnPressed -= OnJumpButtonPressed;
     }
 
-    private void OnJumpButtonClick()
+    private void OnJumpButtonPressed()
     {
         JumpPressed = true;
     }
+
 
     private void Update()
     {
